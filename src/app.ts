@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use("/api/classes", classRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello, Blockchain World! 🌍🚀");
 });
 
 export default app;

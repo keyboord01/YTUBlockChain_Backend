@@ -12,4 +12,8 @@ app.use(bodyParser.json());
 // Routes
 app.use("/api/classes", classRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 export default app;

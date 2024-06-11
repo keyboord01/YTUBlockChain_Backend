@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/classes", classRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello, Blockchain World! 🌍🚀");
+  res.send("Hello, Blockchain World! 🌍🚀🌍🚀");
 });
 
 export default app;

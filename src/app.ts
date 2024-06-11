@@ -6,11 +6,23 @@ import classRoutes from "./routes/classRoutes";
 
 const app = express();
 
-app.use(
-  cors({
-    origin: process.env.PUBLIC_API_HOST,
-  })
-);
+const allowedOrigins = (process.env.ALLOWED_ORIGINS || "").split(",");
+
+const corsOptions = {
+  origin: (
+    origin: string | undefined,
+    callback: (err: Error | null, allow?: boolean) => void
+  ) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);

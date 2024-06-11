@@ -1,18 +1,16 @@
-// src/controllers/authController.ts
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
 
 export const registerUser = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
+  const { username, email, password, invitationToken } = req.body;
+
+  if (invitationToken !== process.env.INVITATION_TOKEN) {
+    return res.status(403).json({ message: "Invalid invitation token" });
+  }
 
   try {
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already taken" });
-    }
-
-    const user = new User({ username, password });
+    const user = new User({ username, email, password });
     await user.save();
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
@@ -20,8 +18,8 @@ export const registerUser = async (req: Request, res: Response) => {
     });
 
     res.status(201).json({ token });
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+  } catch (error) {
+    res.status(400).json({ message: (error as Error).message });
   }
 };
 
@@ -40,7 +38,7 @@ export const loginUser = async (req: Request, res: Response) => {
     } else {
       res.status(401).json({ message: "Invalid username or password" });
     }
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+  } catch (error) {
+    res.status(400).json({ message: (error as Error).message });
   }
 };

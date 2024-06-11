@@ -1,19 +1,16 @@
 import express from "express";
-import cors from "cors";
-import bodyParser from "body-parser";
-import classRoutes from "./routes/classes";
+import authRoutes from "./routes/authRoutes";
+import classRoutes from "./routes/classRoutes";
 
 const app = express();
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/classes", classRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello, Blockchain World! 🌍🚀");
+  res.send("Hello, Blockchain World! 🌍🚀🚀");
 });
 
 export default app;

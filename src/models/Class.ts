@@ -18,7 +18,7 @@ const classSchema = new Schema<IClass>({
   duration: { type: String, required: true },
   topic: { type: String, required: true },
   instructor: { type: String, required: true },
-  instructorImage: { type: String, required: true },
+  instructorImage: { type: String, required: false },
   githubLink: { type: String, required: true },
   isUpcoming: { type: Boolean, required: true },
   tech: { type: String, required: true },

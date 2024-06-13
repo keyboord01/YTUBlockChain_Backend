@@ -8,7 +8,7 @@ interface IClass {
   instructor: string;
   instructorImage: string;
   githubLink: string;
-  isUpcoming: boolean;
+  ClassLocation: string;
   tech: string;
 }
 
@@ -20,7 +20,7 @@ const classSchema = new Schema<IClass>({
   instructor: { type: String, required: true },
   instructorImage: { type: String, required: false },
   githubLink: { type: String, required: true },
-  isUpcoming: { type: Boolean, required: false },
+  ClassLocation: { type: String, required: false },
   tech: { type: String, required: true },
 });
 

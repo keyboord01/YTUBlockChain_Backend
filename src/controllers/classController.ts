@@ -31,6 +31,7 @@ export const createClass = async (req: Request, res: Response) => {
     githubLink: req.body.githubLink,
     ClassLocation: req.body.ClassLocation,
     tech: req.body.tech,
+    createdAt: new Date(),
   });
 
   try {

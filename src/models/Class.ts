@@ -1,3 +1,4 @@
+// models/class.ts
 import { Schema, model } from "mongoose";
 
 interface IClass {
@@ -10,6 +11,7 @@ interface IClass {
   githubLink: string;
   ClassLocation: string;
   tech: string;
+  createdAt: Date;
 }
 
 const classSchema = new Schema<IClass>({
@@ -22,6 +24,7 @@ const classSchema = new Schema<IClass>({
   githubLink: { type: String, required: true },
   ClassLocation: { type: String, required: false },
   tech: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Class = model<IClass>("Class", classSchema);

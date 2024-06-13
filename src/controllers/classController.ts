@@ -54,7 +54,6 @@ export const getClassById = async (req: Request, res: Response) => {
   }
 };
 
-// New function to update a class by ID
 export const updateClassById = async (req: Request, res: Response) => {
   let instructorImageUrl = "";
 
@@ -86,5 +85,17 @@ export const updateClassById = async (req: Request, res: Response) => {
     res.json(updatedClass);
   } catch (err) {
     res.status(400).json({ message: (err as Error).message });
+  }
+};
+
+export const deleteClass = async (req: Request, res: Response) => {
+  try {
+    const deletedClass = await Class.findByIdAndDelete(req.params.id);
+    if (!deletedClass) {
+      return res.status(404).json({ message: "Class not found" });
+    }
+    res.json({ message: "Class deleted" });
+  } catch (err) {
+    res.status(500).json({ message: (err as Error).message });
   }
 };
